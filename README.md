@@ -1,0 +1,1 @@
+qt-regexp-checker
