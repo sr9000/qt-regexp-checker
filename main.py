@@ -1,11 +1,13 @@
-from qt_regexp import *
+import os
+import re
 import sys
 from pathlib import Path
-import os
-import pandas as pd
-import re
-import numpy as np
 from traceback import format_exception
+
+import numpy as np
+import pandas as pd
+
+from qt_regexp import *
 
 tdir = Path(os.getcwd())
 sdir = None
@@ -91,8 +93,10 @@ def save_regexp(ui: Ui_wnd_regexp, wnd: QtWidgets.QMainWindow):
 def setup_behaviour(ui: Ui_wnd_regexp, wnd: QtWidgets.QMainWindow, app: QtWidgets.QApplication) -> None:
     ui.act_quit.triggered.connect(quit)
     ui.act_open_csv.triggered.connect(lambda: open_task(wnd))
+
     ui.edt_regexp.textChanged.connect(lambda: update_regexp(ui))
     ui.btn_copy_regexp.clicked.connect(lambda: copy_regexp(ui, wnd, app))
+
     ui.act_about.triggered.connect(lambda: about(wnd))
     ui.act_save_regexp.triggered.connect(lambda: save_regexp(ui, wnd))
 
