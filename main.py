@@ -32,7 +32,7 @@ def update_regexp(ui: Ui_wnd_regexp):
     try:
         r = re.compile(ui.edt_regexp.text())
     except Exception as e:
-        msg = format_exception(type(e), e, e.__traceback__)
+        msg = format_exception(type(e), e, None)
         for l in msg:
             ui.lst_missed.addItem(l)
         return
@@ -90,15 +90,29 @@ def save_regexp(ui: Ui_wnd_regexp, wnd: QtWidgets.QMainWindow):
         p.write_text(ui.edt_regexp.text())
 
 
+def load_regexp(ui: Ui_wnd_regexp, wnd: QtWidgets.QMainWindow):
+    global sdir
+    if sdir is None:
+        sdir = tdir
+
+    file, _ = QtWidgets.QFileDialog.getOpenFileName(wnd, 'Отрыть регексп', sdir.as_posix(), 'Регексп (*.regexp)')
+    p = Path(file)
+
+    if p.exists() and p.is_file():
+        sdir = p.parent
+        ui.edt_regexp.setText(p.read_text())
+
+
 def setup_behaviour(ui: Ui_wnd_regexp, wnd: QtWidgets.QMainWindow, app: QtWidgets.QApplication) -> None:
-    ui.act_quit.triggered.connect(quit)
-    ui.act_open_csv.triggered.connect(lambda: open_task(wnd))
+    ui.act_quit.triggered.connect(app.quit)
+    ui.act_open_csv.triggered.connect(lambda: open_task(wnd) or update_regexp(ui))
 
     ui.edt_regexp.textChanged.connect(lambda: update_regexp(ui))
     ui.btn_copy_regexp.clicked.connect(lambda: copy_regexp(ui, wnd, app))
 
     ui.act_about.triggered.connect(lambda: about(wnd))
     ui.act_save_regexp.triggered.connect(lambda: save_regexp(ui, wnd))
+    ui.act_load_regexp.triggered.connect(lambda: load_regexp(ui, wnd))
 
 
 if __name__ == "__main__":

@@ -82,8 +82,13 @@ class Ui_wnd_regexp(object):
         self.act_quit.setObjectName("act_quit")
         self.act_save_regexp = QtWidgets.QAction(wnd_regexp)
         self.act_save_regexp.setObjectName("act_save_regexp")
+        self.act_load_regexp = QtWidgets.QAction(wnd_regexp)
+        self.act_load_regexp.setObjectName("act_load_regexp")
         self.menu_file.addAction(self.act_open_csv)
+        self.menu_file.addSeparator()
         self.menu_file.addAction(self.act_save_regexp)
+        self.menu_file.addAction(self.act_load_regexp)
+        self.menu_file.addSeparator()
         self.menu_file.addAction(self.act_quit)
         self.menu_help.addAction(self.act_about)
         self.menubar.addAction(self.menu_file.menuAction())
@@ -105,6 +110,7 @@ class Ui_wnd_regexp(object):
         self.act_about.setText(_translate("wnd_regexp", "О программе"))
         self.act_quit.setText(_translate("wnd_regexp", "Выйти"))
         self.act_save_regexp.setText(_translate("wnd_regexp", "Сохранить регексп"))
+        self.act_load_regexp.setText(_translate("wnd_regexp", "Загрузить регексп"))
 
 
 if __name__ == "__main__":

@@ -112,7 +112,10 @@
      <string>Файл</string>
     </property>
     <addaction name="act_open_csv"/>
+    <addaction name="separator"/>
     <addaction name="act_save_regexp"/>
+    <addaction name="act_load_regexp"/>
+    <addaction name="separator"/>
     <addaction name="act_quit"/>
    </widget>
    <widget class="QMenu" name="menu_help">
@@ -142,6 +145,11 @@
   <action name="act_save_regexp">
    <property name="text">
     <string>Сохранить регексп</string>
+   </property>
+  </action>
+  <action name="act_load_regexp">
+   <property name="text">
+    <string>Загрузить регексп</string>
    </property>
   </action>
  </widget>
